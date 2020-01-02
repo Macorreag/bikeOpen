@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+
+<head>
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+
+    <style>
+        #map {
+            widh: 50px;
+            height: 600px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        const BIKEPATH =
+            "https://datosabiertos.bogota.gov.co/dataset/fe3b2925-3e76-4928-9a01-91cbd2e02f3b/resource/0ee86336-840a-458b-8e90-65a8bd10a927/download/cicl.geojson";
+
+
+        var map = L.map('map').
+        setView([ 4.5980800, -74.0760439],
+            13);
+
+        function loadJSON(path, success, error) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (success)
+                            success(JSON.parse(xhr.responseText));
+                    } else {
+                        if (error)
+                            error(xhr);
+                    }
+                }
+            };
+            xhr.open("GET", path, true);
+            xhr.send();
+        }
+
+        L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=31e5cca6ebd249ce9c40dc5dd7aecd10', {
+            /*Atribution is editable*/
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+            maxZoom: 18
+        }).addTo(map);
+
+        L.control.scale().addTo(map);
+        L.marker([4.5980800, -74.0760439], {
+            draggable: true
+        }).addTo(map);
+
+        loadJSON(BIKEPATH,
+            function (data) {
+                console.log(data);
+                L.geoJSON(data, {
+
+                }).bindPopup(function (layer) {
+                    return layer.feature.properties.description;
+                }).addTo(map)
+            },
+            function (xhr) {
+                console.error(xhr);
+            },
+
+
+        );
+    </script>
+</body>
+
+</html>
