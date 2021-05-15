@@ -18,8 +18,9 @@
 <body>
     <div id="map"></div>
     <script>
+
         const BIKEPATH =
-            "https://datosabiertos.bogota.gov.co/dataset/fe3b2925-3e76-4928-9a01-91cbd2e02f3b/resource/0ee86336-840a-458b-8e90-65a8bd10a927/download/cicl.geojson";
+        "./../data/Ciclorruta.geojson";
 
 
         var map = L.map('map').
@@ -50,9 +51,22 @@
         }).addTo(map);
 
         L.control.scale().addTo(map);
-        L.marker([4.5980800, -74.0760439], {
-            draggable: true
-        }).addTo(map);
+
+        var marker = 
+            L.marker([4.5980800, -74.0760439], {
+                draggable: true
+            }).addTo(map);
+
+
+        marker.on('dragend', function (e) {
+            // Send data marker to the parent node on drag the marker
+            const message = JSON.stringify({
+                latitude: marker.getLatLng().lat,
+                longitude: marker.getLatLng().lng,
+            });
+            window.parent.postMessage(message, '*');
+        });
+  
 
         loadJSON(BIKEPATH,
             function (data) {
