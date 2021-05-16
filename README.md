@@ -1,5 +1,9 @@
 ## Usar la capa del mapa de Open Street map para Ciclistas
 
+## Como manejar las comunicaciones con este ifram 
+[Tutorial](https://htmldom.dev/communication-between-an-iframe-and-its-parent-window/)
+
+
 ## Recibir información cuando se embebe en un iframe
 
 ```html
