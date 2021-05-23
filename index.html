@@ -45,6 +45,7 @@
 		<div id="map"></div>
 		<script>
 			const BIKEPATH = "./../data/Ciclorruta.geojson";
+			const ROBOS = "https://script.google.com/macros/s/AKfycbzsm2ZGUz8bqXkdHCn2AqP9dVzHPrkealIYMhTeJpgOhqsY0B2pBDdBRRLaFEte3aQ5xA/exec"
 
 			var map = L.map("map").setView([4.59808, -74.0760439], 13);
 
@@ -103,9 +104,10 @@
 
 				// Send data marker to the parent node on drag the marker
 				const message = JSON.stringify({
-					latitude: marker.getLatLng().lat,
-					longitude: marker.getLatLng().lng,
+					latitude: e.target._latlng.lat,
+					longitude: e.target._latlng.lng,
 				});
+				console.log(e.target._latlng)
 				window.parent.postMessage(message, "*");
 			});
 
@@ -123,6 +125,24 @@
 					console.error(xhr);
 				}
 			);
+
+			// loadJSON(
+			// 	ROBOS,
+			// 	function (data) {
+			// 		console.log(data);
+			// 		L.geoJSON(data, {})
+			// 			.bindPopup(function (layer) {
+			// 				return layer.feature.properties.description;
+			// 			})
+			// 			.addTo(map);
+			// 	},
+			// 	function (xhr) {
+			// 		console.error(xhr);
+			// 	}
+			// );
+
+
+			
 		</script>
 	</body>
 </html>
