@@ -1,4 +1,4 @@
-import { loadJSON } from '/js/jsonManage.js'
+import { loadJSON } from './js/jsonManage.js'
 const BIKEPATH = "./../data/Ciclorruta.geojson";
 const ROBOS = "https://script.google.com/macros/s/AKfycbzsm2ZGUz8bqXkdHCn2AqP9dVzHPrkealIYMhTeJpgOhqsY0B2pBDdBRRLaFEte3aQ5xA/exec"
 
