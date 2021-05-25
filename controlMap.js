@@ -1,5 +1,5 @@
 import { loadJSON } from './js/jsonManage.js'
-const BIKEPATH = "./../data/Ciclorruta.geojson";
+const BIKEPATH = "./data/Ciclorruta.geojson";
 const ROBOS = "https://script.google.com/macros/s/AKfycbzsm2ZGUz8bqXkdHCn2AqP9dVzHPrkealIYMhTeJpgOhqsY0B2pBDdBRRLaFEte3aQ5xA/exec"
 
 var map = L.map("map").setView([4.59808, -74.0760439], 13);
